@@ -1,0 +1,189 @@
+:root {
+  --bg: #f7f9fb;
+  --panel: #ffffff;
+  --ink: #1c2733;
+  --muted: #5b6b7a;
+  --accent: #0a6ebd;
+  --accent-dark: #084f88;
+  --border: #dde5ec;
+  --max-width: 1100px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--accent-dark);
+}
+
+.site-header .brand {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+.site-header .brand:hover { text-decoration: none; }
+
+.site-header nav a {
+  color: #eaf3fb;
+  margin-left: 1.25rem;
+  font-size: 0.95rem;
+}
+.site-header nav a:hover { color: #fff; }
+
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+h1 { font-size: 1.9rem; margin-bottom: 0.4rem; }
+h2 { font-size: 1.3rem; margin-top: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; }
+
+p.meta, p.lede { color: var(--muted); }
+p.lede { font-size: 1.1rem; }
+
+.hero {
+  padding: 2.5rem 0 1.5rem;
+}
+
+.disclaimer {
+  background: #fff7e6;
+  border: 1px solid #f0d999;
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  color: #6b5000;
+  margin: 1.5rem 0;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.2rem;
+  margin: 1.5rem 0;
+}
+
+.section-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+}
+.section-card img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin-bottom: 0.8rem;
+  object-fit: cover;
+  max-height: 160px;
+}
+.section-card h3 { margin: 0 0 0.4rem; }
+.section-card .status {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+  width: fit-content;
+}
+.status.ready { background: #e3f6e8; color: #1a7a3a; }
+.status.progress { background: #fdeadd; color: #a25313; }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.2rem;
+  margin: 1rem 0 2rem;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.7rem;
+  margin: 0;
+}
+.card img {
+  width: 100%;
+  border-radius: 6px;
+  display: block;
+}
+.card figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding-top: 0.5rem;
+  text-align: center;
+}
+
+table.float-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+  background: var(--panel);
+}
+table.float-table th, table.float-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  font-size: 0.92rem;
+}
+table.float-table th { color: var(--muted); font-weight: 600; }
+img.thumb {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.back-link { display: inline-block; margin-bottom: 1rem; font-size: 0.9rem; }
+
+.grid-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0 2rem;
+}
+.fact {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+.fact .value { font-size: 1.3rem; font-weight: 700; }
+.fact .label { color: var(--muted); font-size: 0.85rem; }
+
+figure.full { margin: 1.2rem 0; }
+figure.full img { width: 100%; border-radius: 8px; border: 1px solid var(--border); }
+figure.full figcaption { color: var(--muted); font-size: 0.9rem; margin-top: 0.4rem; }
+
+.site-footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+ul.station-list { columns: 2; }
+@media (max-width: 500px) { ul.station-list { columns: 1; } }
