@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About the Model · Iceland ROMS 2km</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">Iceland ROMS 2km</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About the Model</a>
+    <a href="argo/index.html">ROMS vs Argo</a>
+    <a href="moorings.html">ROMS vs Moorings</a>
+  </nav>
+</header>
+<main>
+
+<h1>About the Model</h1>
+<p class="lede">A ROMS (Regional Ocean Modeling System) configuration covering the
+waters around Iceland at roughly 2&nbsp;km horizontal resolution.</p>
+
+<div class="grid-facts">
+  <div class="fact"><div class="value">~2 km</div><div class="label">Horizontal resolution</div></div>
+  <div class="fact"><div class="value">602 &times; 652</div><div class="label">Grid points (xi &times; eta)</div></div>
+  <div class="fact"><div class="value">10&ndash;3827 m</div><div class="label">Bathymetry depth range</div></div>
+  <div class="fact"><div class="value">57.5&ndash;72.4&deg;N</div><div class="label">Latitude range</div></div>
+  <div class="fact"><div class="value">33.5&deg;W&ndash;0.5&deg;E</div><div class="label">Longitude range</div></div>
+  <div class="fact"><div class="value">HAFRO</div><div class="label">Institution</div></div>
+</div>
+
+<p>The domain spans the Iceland Sea, Denmark Strait, and the Irminger Sea and
+Iceland&ndash;Faroe shelf regions, using ROMS terrain-following (sigma)
+vertical coordinates. The grid was built at the Icelandic Marine and
+Freshwater Research Institute (Hafrannsóknastofnun, HAFRO).</p>
+
+<figure class="full">
+  <img src="assets/img/overview/iceland2km_bathymetry.png" alt="Iceland 2km ROMS model bathymetry and domain">
+  <figcaption>Model bathymetry over the full domain.</figcaption>
+</figure>
+
+<h2>ROMS</h2>
+<p>ROMS is a free-surface, terrain-following, primitive-equation community
+ocean model used widely for coastal and regional ocean simulation. See
+<a href="https://www.myroms.org/" target="_blank" rel="noopener">myroms.org</a>
+for the model source and documentation.</p>
+
+<h2>Data &amp; code</h2>
+<p>This site currently hosts validation figures comparing the model against
+independent observations (Argo floats, moorings). See the
+<a href="https://github.com/kravi1220/iceland-roms-2km">GitHub repository</a>
+for the site source and the scripts used to generate these comparisons.</p>
+
+</main>
+<footer class="site-footer">
+  <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
+  Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
+</footer>
+</body>
+</html>
