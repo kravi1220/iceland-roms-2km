@@ -30,7 +30,7 @@ HEAD = """<!doctype html>
   <nav>
     <a href="{home}">Home</a>
     <a href="{about}">About the Model</a>
-    <a href="{argo_index}">ROMS vs Argo</a>
+    <a href="{argo_index}" class="active">ROMS vs Argo</a>
     <a href="{moorings}">ROMS vs Moorings</a>
   </nav>
 </header>
@@ -39,6 +39,10 @@ HEAD = """<!doctype html>
 
 FOOT = """</main>
 <footer class="site-footer">
+  <div class="footer-brand">
+    <img src="../assets/img/brand/mfri_logo.png" alt="MFRI logo">
+    <span>Marine and Freshwater Research Institute<br>Hafrannsóknastofnun (HAFRO)</span>
+  </div>
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
@@ -98,7 +102,10 @@ def main() -> None:
 
     os.makedirs(ARGO_DIR, exist_ok=True)
 
-    table_rows = []
+    # NOTE: argo/index.html is hand-maintained (the interactive Leaflet/Plotly
+    # explorer) and is NOT generated here. This script only builds the static
+    # per-float report pages linked from that explorer's "Full static report"
+    # link and from data/argo_floats.json.
     for row in rows:
         fid = row["float_wmo_id"]
         fdir = os.path.join(FLOATS_DIR, fid)
@@ -111,75 +118,7 @@ def main() -> None:
         with open(os.path.join(ARGO_DIR, f"float_{fid}.html"), "w") as f:
             f.write(page)
 
-        thumb = "TS" if have.get("TS") else next((k for k, v in have.items() if v), None)
-        thumb_cell = (
-            f'<a href="float_{fid}.html"><img class="thumb" loading="lazy" '
-            f'src="../assets/img/floats/{fid}/{thumb}.png" alt=""></a>'
-            if thumb
-            else ""
-        )
-        table_rows.append(
-            f"<tr><td>{thumb_cell}</td>"
-            f'<td><a href="float_{fid}.html">{fid}</a></td>'
-            f"<td>{row['lat']}</td><td>{row['lon']}</td>"
-            f"<td>{row['n_matched_days'] or 0}</td></tr>"
-        )
-
-    index = HEAD.format(
-        title="ROMS vs Argo Floats",
-        css="../assets/css/style.css",
-        home="../index.html",
-        about="../about.html",
-        argo_index="index.html",
-        moorings="../moorings.html",
-    )
-    index += """
-<h1>ROMS vs Argo Floats</h1>
-<p>The Iceland 2&nbsp;km ROMS daily-average output is colocated with Argo float
-profiles: for each Argo profile, the nearest ocean grid cell (great-circle
-nearest-neighbour on the model's wet-point mask) and the closest daily model
-record in time are selected, then temperature and salinity are compared on
-common depth levels (10, 20 and 50&nbsp;m) and over the full water column.
-Floats farther than 50&nbsp;km from any model grid cell are excluded.</p>
-
-<h2>Overview</h2>
-<div class="gallery">
-  <figure class="card">
-    <a href="../assets/img/overview/float_roms_colocation_map.png">
-      <img loading="lazy" src="../assets/img/overview/float_roms_colocation_map.png" alt="Map of colocated Argo floats over the model domain"></a>
-    <figcaption>Float positions colocated with the model domain</figcaption>
-  </figure>
-  <figure class="card">
-    <a href="../assets/img/overview/TS_all_floats.png">
-      <img loading="lazy" src="../assets/img/overview/TS_all_floats.png" alt="Combined T-S diagram, all floats"></a>
-    <figcaption>Combined T-S diagram, all floats</figcaption>
-  </figure>
-  <figure class="card">
-    <a href="../assets/img/overview/taylor_temperature_combined.png">
-      <img loading="lazy" src="../assets/img/overview/taylor_temperature_combined.png" alt="Taylor diagram, temperature skill"></a>
-    <figcaption>Taylor diagram &mdash; temperature skill</figcaption>
-  </figure>
-  <figure class="card">
-    <a href="../assets/img/overview/taylor_salinity_combined.png">
-      <img loading="lazy" src="../assets/img/overview/taylor_salinity_combined.png" alt="Taylor diagram, salinity skill"></a>
-    <figcaption>Taylor diagram &mdash; salinity skill</figcaption>
-  </figure>
-</div>
-
-<h2>Floats ({n} total)</h2>
-<table class="float-table">
-  <thead><tr><th></th><th>WMO ID</th><th>Lat (&deg;N)</th><th>Lon (&deg;E)</th><th>Colocated days</th></tr></thead>
-  <tbody>
-{rows_html}
-  </tbody>
-</table>
-""".format(n=len(rows), rows_html="\n".join(table_rows))
-    index += FOOT
-
-    with open(os.path.join(ARGO_DIR, "index.html"), "w") as f:
-        f.write(index)
-
-    print(f"Generated {len(rows)} float pages + argo/index.html")
+    print(f"Generated {len(rows)} float pages")
 
 
 if __name__ == "__main__":

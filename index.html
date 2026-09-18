@@ -11,7 +11,7 @@
 <header class="site-header">
   <a class="brand" href="index.html">Iceland ROMS 2km</a>
   <nav>
-    <a href="index.html">Home</a>
+    <a href="index.html" class="active">Home</a>
     <a href="about.html">About the Model</a>
     <a href="argo/index.html">ROMS vs Argo</a>
     <a href="moorings.html">ROMS vs Moorings</a>
@@ -19,12 +19,17 @@
 </header>
 <main>
 
-<section class="hero">
+<section class="hero-band">
   <h1>Iceland ROMS 2&nbsp;km Ocean Model</h1>
   <p class="lede">A 2&nbsp;km-resolution ROMS (Regional Ocean Modeling System) implementation
   of the seas around Iceland &mdash; the Iceland Sea, Denmark Strait and the Irminger
   Sea shelf &mdash; developed for physical oceanographic research and fisheries
   applications, with ongoing validation against independent observations.</p>
+  <div class="status-row">
+    <span>&#128225; 36 Argo floats</span>
+    <span>&#9875; 7 mooring deployments</span>
+    <span>&#128506; ~2&nbsp;km resolution</span>
+  </div>
 </section>
 
 <div class="disclaimer">
@@ -61,8 +66,21 @@
 
 </div>
 
+<h2>Developed at</h2>
+<a href="https://www.hafogvatn.is" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:1.2rem; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.4rem; box-shadow:var(--shadow); text-decoration:none; color:inherit; max-width:560px;">
+  <img src="assets/img/brand/mfri_logo.png" alt="MFRI logo" style="height:64px; width:auto;">
+  <span>
+    <strong style="display:block; color:var(--ink);">Marine and Freshwater Research Institute</strong>
+    <span style="color:var(--muted); font-size:0.9rem;">Hafrannsóknastofnun (HAFRO) &middot; Reykjavik, Iceland</span>
+  </span>
+</a>
+
 </main>
 <footer class="site-footer">
+  <div class="footer-brand">
+    <img src="assets/img/brand/mfri_logo.png" alt="MFRI logo">
+    <span>Marine and Freshwater Research Institute<br>Hafrannsóknastofnun (HAFRO)</span>
+  </div>
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
