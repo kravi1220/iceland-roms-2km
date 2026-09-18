@@ -26,7 +26,13 @@ HEAD = """<!doctype html>
 </head>
 <body>
 <header class="site-header">
-  <a class="brand" href="{home}">Iceland ROMS 2km</a>
+  <a class="brand" href="https://www.hafogvatn.is" target="_blank" rel="noopener">
+    <img src="../assets/img/brand/mfri_logo.png" alt="MFRI logo">
+    <span class="brand-text">
+      <span class="brand-org">Marine &amp; Freshwater Research Institute</span>
+      <span class="brand-sub">Iceland ROMS 2km</span>
+    </span>
+  </a>
   <nav>
     <a href="{home}">Home</a>
     <a href="{about}">About the Model</a>
