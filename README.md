@@ -33,14 +33,24 @@ client-side.
   colocated time series for the moorings explorer.
 - `data/bathymetry_overlay.json` — geographic bounds/colour-scale for the
   bathymetry image overlay.
+- `data/argo_profiles/<id>.json` — full-depth colocated profiles per float
+  (all-profiles min/mean/max envelope + each individual profile), powering the
+  explorer's "Depth profile" view (shaded range and single-profile-by-date).
 - `data/float_metadata.csv` — float WMO ID, position and number of colocated
   days, used to build the static float report pages.
+- `assets/img/brand/` — the official MFRI/HAFRO logo (from hafogvatn.is's
+  press-logo page), used for institutional credit only, not covered by the
+  MIT license below.
 - `scripts/generate_argo_pages.py` — regenerates `argo/float_<id>.html` from
   `data/float_metadata.csv` and `assets/img/floats/`.
-- `scripts/export_argo_json.py` — regenerates the Argo explorer's JSON from
-  the ROMS-Argo colocation NetCDFs.
+- `scripts/export_argo_json.py` — regenerates the Argo explorer's fixed-depth
+  time-series JSON from the ROMS-Argo colocation NetCDFs.
+- `scripts/export_argo_profiles.py` — regenerates the Argo explorer's
+  full-depth profile JSON from the same NetCDFs.
 - `scripts/generate_bathymetry_overlay.py` — regenerates the bathymetry PNG +
-  bounds JSON directly from `iceland2km_grid.nc`.
+  bounds JSON directly from `iceland2km_grid.nc`, pre-warped to Web Mercator
+  so it lines up with the Leaflet basemap at every latitude (a plain
+  lon/lat-gridded image drifts noticeably north-south otherwise).
 - `../roms_mooring_validation.py` (in the parent working directory, not part
   of this repo) — the ROMS-vs-mooring colocation pipeline; regenerates
   `mooring_plots/*.png` and this repo's `data/moorings*.json`.
@@ -49,7 +59,8 @@ client-side.
 
 ```bash
 python3 scripts/generate_argo_pages.py         # static per-float report pages
-python3 scripts/export_argo_json.py            # Argo explorer JSON
+python3 scripts/export_argo_json.py            # Argo explorer fixed-depth JSON
+python3 scripts/export_argo_profiles.py        # Argo explorer depth-profile JSON
 python3 scripts/generate_bathymetry_overlay.py # bathymetry overlay PNG + JSON
 ```
 
@@ -84,4 +95,7 @@ Institute / Hafrannsóknastofnun).
 
 Code (HTML/CSS/scripts) is licensed under the MIT License, see [LICENSE](LICENSE).
 Figures are experimental research output, provided for research use only —
-see the disclaimer on the site.
+see the disclaimer on the site. The MFRI/HAFRO logo (`assets/img/brand/`) is
+the institute's own trademark, used here only to credit them and reproduced
+from their public [logo page](https://www.hafogvatn.is/is/midlun/merki); it is
+not covered by the MIT license.

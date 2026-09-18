@@ -25,6 +25,22 @@ CMAP_NAME = "viridis_r"
 DPI = 200
 
 
+def web_mercator_y(lat_deg):
+    """Web Mercator northing (unnormalized, in radians of 'stretched' latitude).
+
+    Leaflet's default CRS is Web Mercator, so an L.imageOverlay's pixel rows
+    are spaced linearly in *this* coordinate, not in plain latitude. Rendering
+    the raster with plain lat on the y-axis (equirectangular/Plate Carree)
+    makes it drift away from the OSM basemap as latitude increases -- most
+    visible here since the domain spans 57.5-72.4 N. Pre-warping the y-axis to
+    Mercator space before rasterizing keeps the pixel grid linear in the same
+    coordinate Leaflet uses to place the image, so it lines up at every
+    latitude.
+    """
+    lat_rad = np.radians(np.clip(lat_deg, -85.05, 85.05))
+    return np.log(np.tan(np.pi / 4.0 + lat_rad / 2.0))
+
+
 def main():
     with nc.Dataset(GRID_NC) as d:
         lon = d.variables["lon_rho"][:]
@@ -37,15 +53,26 @@ def main():
 
     lon_min, lon_max = float(lon.min()), float(lon.max())
     lat_min, lat_max = float(lat.min()), float(lat.max())
+    merc_y = web_mercator_y(lat)
+    merc_y_min, merc_y_max = web_mercator_y(lat_min), web_mercator_y(lat_max)
 
-    fig = plt.figure(figsize=(10, 10), dpi=DPI)
+    # Match the canvas aspect ratio to the projected extent so the raster
+    # isn't needlessly resampled anisotropically by Leaflet after warping.
+    # Both spans must be in the same units (radians): Mercator is conformal,
+    # so lon and merc_y are directly comparable once both are in radians.
+    lon_span_rad = np.radians(lon_max - lon_min)
+    merc_span = merc_y_max - merc_y_min
+    fig_w = 10.0
+    fig_h = fig_w * (merc_span / lon_span_rad)
+
+    fig = plt.figure(figsize=(fig_w, fig_h), dpi=DPI)
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
     ax.set_xlim(lon_min, lon_max)
-    ax.set_ylim(lat_min, lat_max)
+    ax.set_ylim(merc_y_min, merc_y_max)
 
     cmap = cm.get_cmap(CMAP_NAME).copy()
-    ax.pcolormesh(lon, lat, h_masked, cmap=cmap, vmin=vmin, vmax=vmax,
+    ax.pcolormesh(lon, merc_y, h_masked, cmap=cmap, vmin=vmin, vmax=vmax,
                   shading="auto", rasterized=True)
     # land: fully transparent so the Leaflet base map / land colour shows through
     ax.set_facecolor((0, 0, 0, 0))

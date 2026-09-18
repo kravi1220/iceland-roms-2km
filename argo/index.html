@@ -13,7 +13,7 @@
   <nav>
     <a href="../index.html">Home</a>
     <a href="../about.html">About the Model</a>
-    <a href="index.html">ROMS vs Argo</a>
+    <a href="index.html" class="active">ROMS vs Argo</a>
     <a href="../moorings.html">ROMS vs Moorings</a>
   </nav>
 </header>
@@ -36,8 +36,11 @@ depth. Drag the range slider under the chart to scrub through the record.</p>
       <p id="panel-meta" class="meta" style="margin:0 0 0.4rem; font-size:0.85rem;"></p>
       <div class="panel-controls">
         <div>
-          <label for="depth-select">Depth</label>
-          <select id="depth-select"></select>
+          <label for="view-select">View</label>
+          <select id="view-select">
+            <option value="timeseries">Time series (fixed depth)</option>
+            <option value="profile">Depth profile</option>
+          </select>
         </div>
         <div>
           <label for="var-select">Variable</label>
@@ -45,6 +48,21 @@ depth. Drag the range slider under the chart to scrub through the record.</p>
             <option value="temp">Temperature</option>
             <option value="salt">Salinity</option>
           </select>
+        </div>
+        <div id="depth-control">
+          <label for="depth-select">Depth</label>
+          <select id="depth-select"></select>
+        </div>
+        <div id="profile-mode-control" style="display:none;">
+          <label for="profile-mode-select">Profiles</label>
+          <select id="profile-mode-select">
+            <option value="fill">All (shaded range)</option>
+            <option value="single">Single profile</option>
+          </select>
+        </div>
+        <div id="profile-date-control" style="display:none;">
+          <label for="profile-date-select">Date</label>
+          <select id="profile-date-select"></select>
         </div>
       </div>
       <div id="chart"></div>
@@ -65,20 +83,14 @@ are excluded.</p>
       <img loading="lazy" src="../assets/img/overview/TS_all_floats.png" alt="Combined T-S diagram, all floats"></a>
     <figcaption>Combined T-S diagram, all floats</figcaption>
   </figure>
-  <figure class="card">
-    <a href="../assets/img/overview/taylor_temperature_combined.png">
-      <img loading="lazy" src="../assets/img/overview/taylor_temperature_combined.png" alt="Taylor diagram, temperature skill"></a>
-    <figcaption>Taylor diagram &mdash; temperature skill</figcaption>
-  </figure>
-  <figure class="card">
-    <a href="../assets/img/overview/taylor_salinity_combined.png">
-      <img loading="lazy" src="../assets/img/overview/taylor_salinity_combined.png" alt="Taylor diagram, salinity skill"></a>
-    <figcaption>Taylor diagram &mdash; salinity skill</figcaption>
-  </figure>
 </div>
 
 </main>
 <footer class="site-footer">
+  <div class="footer-brand">
+    <img src="../assets/img/brand/mfri_logo.png" alt="MFRI logo">
+    <span>Marine and Freshwater Research Institute<br>Hafrannsóknastofnun (HAFRO)</span>
+  </div>
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
