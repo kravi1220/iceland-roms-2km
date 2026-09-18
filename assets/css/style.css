@@ -198,6 +198,18 @@ p.lede { font-size: 1.12rem; }
   max-height: 160px;
 }
 .section-card h3 { margin: 0 0 0.4rem; font-family: "Source Serif 4", Georgia, serif; }
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.card-icon svg { width: 28px; height: 28px; }
 .section-card .status {
   display: inline-block;
   font-size: 0.75rem;
