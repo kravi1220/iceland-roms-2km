@@ -34,11 +34,6 @@
 of the seas around Iceland &mdash; the Iceland Sea, Denmark Strait and the Irminger
 Sea shelf &mdash; developed for physical oceanographic research and fisheries
 applications, with ongoing validation against independent observations.</p>
-<div class="status-row">
-  <span>&#128225; 36 Argo floats</span>
-  <span>&#9875; 7 mooring deployments</span>
-  <span>&#128506; ~2&nbsp;km resolution</span>
-</div>
 
 <div class="disclaimer">
   This is a research model. Output presented here is experimental and intended
@@ -58,14 +53,28 @@ applications, with ongoing validation against independent observations.</p>
   </a>
 
   <a class="section-card" href="argo/index.html" style="color:inherit;text-decoration:none;">
-    <img src="assets/img/overview/float_roms_colocation_map.png" alt="ROMS vs Argo float colocation map">
+    <div class="card-icon" title="Argo float" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="12" y1="2" x2="12" y2="5"/>
+        <rect x="8" y="5" width="8" height="14" rx="4"/>
+        <line x1="8" y1="12" x2="16" y2="12"/>
+      </svg>
+    </div>
     <span class="status ready">Ready</span>
     <h3>ROMS vs Argo Floats</h3>
-    <p>36 colocated Argo floats: temperature and salinity profiles, time series,
-    T-S diagrams and Hovmöller sections compared against the model.</p>
+    <p>36 colocated Argo floats: depth profiles, fixed-depth time series and
+    Hovm&ouml;ller sections compared against the model.</p>
   </a>
 
   <a class="section-card" href="moorings.html" style="color:inherit;text-decoration:none;">
+    <div class="card-icon" title="Mooring" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="5" r="2"/>
+        <line x1="12" y1="7" x2="12" y2="21"/>
+        <line x1="8" y1="9" x2="16" y2="9"/>
+        <path d="M5 12H2a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-3"/>
+      </svg>
+    </div>
     <span class="status ready">Ready</span>
     <h3>ROMS vs Moorings</h3>
     <p>7 station-deployments (ADCP currents, MicroCat temperature/salinity)
@@ -73,6 +82,15 @@ applications, with ongoing validation against independent observations.</p>
   </a>
 
   <a class="section-card" href="sst_sss.html" style="color:inherit;text-decoration:none;">
+    <div class="card-icon" title="Satellite" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m13 7 9 9-3 3-9-9z"/>
+        <path d="m4 16 4-4 3 3-4 4z"/>
+        <path d="m14 10 1-1"/>
+        <path d="M13 22a3 3 0 0 1-3-3"/>
+        <path d="M2 13a3 3 0 0 1 3-3"/>
+      </svg>
+    </div>
     <span class="status ready">Ready</span>
     <h3>ROMS vs Satellite SST &amp; SSS</h3>
     <p>Daily sea surface temperature and salinity maps against AVHRR and CMEMS
@@ -80,6 +98,17 @@ applications, with ongoing validation against independent observations.</p>
   </a>
 
 </div>
+
+<h2>Model Domain in 3D</h2>
+<p>The model domain as an extracted slab: a ROMS sea surface temperature
+snapshot draped on top, a high-resolution coastline marking the shore, and
+the real seafloor relief exposed below &mdash; the Denmark Strait trench
+dropping away to the northwest, the Iceland&ndash;Faroe Ridge to the
+southeast.</p>
+<figure class="full">
+  <img src="assets/img/overview/bathymetry_3d.png" alt="3D view of the Iceland 2km ROMS domain: SST on top, bathymetry relief below" style="background:var(--panel);">
+  <figcaption>Top: ROMS SST, 2018-08-15. Bottom: model bathymetry. Vertical relief exaggerated for visibility. See <a href="about.html">About the Model</a> for the 2-D map and domain facts.</figcaption>
+</figure>
 
 <h2>Developed at</h2>
 <a href="https://www.hafogvatn.is" target="_blank" rel="noopener" style="display:flex; align-items:center; gap:1.2rem; background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:1.2rem 1.4rem; box-shadow:var(--shadow); text-decoration:none; color:inherit; max-width:560px;">
