@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROMS vs Moorings · Iceland ROMS 2km</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <header class="site-header">
@@ -19,12 +20,40 @@
 <main>
 
 <h1>ROMS vs Moorings</h1>
-<span class="status progress">In progress</span>
-<p class="lede">Comparison of the model against fixed mooring records around
-Iceland is under development. This page will show colocated ROMS time series
-against the ADCP current and MicroCat temperature/salinity records below,
-following the same colocation approach used for the
-<a href="argo/index.html">Argo float comparison</a>.</p>
+<p>Fixed mooring records around Iceland &mdash; ADCP currents and MicroCat
+temperature/salinity &mdash; colocated with the nearest ROMS grid cell at each
+instrument's actual mean depth. Click a mooring on the map, then pick a
+deployment, variable and depth.</p>
+
+<div class="explorer">
+  <div>
+    <div id="map"></div>
+    <div id="legend"></div>
+  </div>
+  <div class="panel">
+    <p id="panel-empty" class="panel-empty">Select a mooring on the map to see its comparison.</p>
+    <div id="panel-content" style="display:none;">
+      <h3 id="panel-title" style="margin:0 0 0.2rem;"></h3>
+      <p id="panel-meta" class="meta" style="margin:0 0 0.4rem; font-size:0.85rem;"></p>
+      <div class="panel-controls">
+        <div>
+          <label for="deployment-select">Deployment</label>
+          <select id="deployment-select"></select>
+        </div>
+        <div>
+          <label for="var-select">Variable</label>
+          <select id="var-select"></select>
+        </div>
+        <div>
+          <label for="depth-select">Depth</label>
+          <select id="depth-select"></select>
+        </div>
+      </div>
+      <div id="chart"></div>
+    </div>
+    <ul id="site-list" class="site-list"></ul>
+  </div>
+</div>
 
 <h2>Deployments</h2>
 <table class="float-table">
@@ -33,26 +62,24 @@ following the same colocation approach used for the
     <tr><td>DS1</td><td>2018&ndash;2019</td><td>ADCP, MicroCat</td></tr>
     <tr><td>HB2</td><td>2017&ndash;2018, 2018&ndash;2019</td><td>ADCP, 2&times; MicroCat</td></tr>
     <tr><td>HB3</td><td>2017&ndash;2018, 2018&ndash;2019</td><td>ADCP, 2&times; MicroCat</td></tr>
-    <tr><td>HB4</td><td>2017&ndash;2018</td><td>ADCP, MicroCat</td></tr>
+    <tr><td>HB4</td><td>2017&ndash;2018</td><td>ADCP only (MicroCat instrument lost)</td></tr>
     <tr><td>SL2-2</td><td>2017&ndash;2018</td><td>ADCP, 2&times; MicroCat</td></tr>
   </tbody>
 </table>
-
-<p>DS1 (Denmark Strait), HB2&ndash;HB4 (Húnaflói) and SL2-2 are moored ADCP
-(currents) and MicroCat (temperature/salinity) records spanning 2017&ndash;2019,
-maintained by HAFRO.</p>
-
-<h2>Next steps</h2>
-<p>Colocating ROMS output with each mooring's position and instrument depths,
-then comparing time series and computing skill metrics analogous to the
-Argo Taylor diagrams, is planned as a follow-up to this site. Check the
-<a href="https://github.com/kravi1220/iceland-roms-2km">GitHub repository</a>
-for progress.</p>
+<p>DS1 (Denmark Strait), HB2&ndash;HB4 (H&uacute;nafl&oacute;i) and SL2-2 are
+moored ADCP (currents) and MicroCat (temperature/salinity) records spanning
+2017&ndash;2019, maintained by HAFRO. The ROMS daily-average archive used here
+covers Dec&nbsp;2017&ndash;Dec&nbsp;2018, so the 2018&ndash;2019 deployments
+only overlap for their first few months.</p>
 
 </main>
 <footer class="site-footer">
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/mooring-explorer.js"></script>
 </body>
 </html>
