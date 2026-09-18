@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROMS vs Argo Floats · Iceland ROMS 2km</title>
 <link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <header class="site-header">
@@ -19,20 +20,46 @@
 <main>
 
 <h1>ROMS vs Argo Floats</h1>
-<p>The Iceland 2&nbsp;km ROMS daily-average output is colocated with Argo float
-profiles: for each Argo profile, the nearest ocean grid cell (great-circle
-nearest-neighbour on the model's wet-point mask) and the closest daily model
-record in time are selected, then temperature and salinity are compared on
-common depth levels (10, 20 and 50&nbsp;m) and over the full water column.
-Floats farther than 50&nbsp;km from any model grid cell are excluded.</p>
+<p>Click a float on the map (or in the list) to compare its colocated ROMS
+temperature and salinity against the Argo observations, at each available
+depth. Drag the range slider under the chart to scrub through the record.</p>
+
+<div class="explorer">
+  <div>
+    <div id="map"></div>
+    <div id="legend"></div>
+  </div>
+  <div class="panel">
+    <p id="panel-empty" class="panel-empty">Select a float on the map to see its comparison.</p>
+    <div id="panel-content" style="display:none;">
+      <h3 id="panel-title" style="margin:0 0 0.2rem;"></h3>
+      <p id="panel-meta" class="meta" style="margin:0 0 0.4rem; font-size:0.85rem;"></p>
+      <div class="panel-controls">
+        <div>
+          <label for="depth-select">Depth</label>
+          <select id="depth-select"></select>
+        </div>
+        <div>
+          <label for="var-select">Variable</label>
+          <select id="var-select">
+            <option value="temp">Temperature</option>
+            <option value="salt">Salinity</option>
+          </select>
+        </div>
+      </div>
+      <div id="chart"></div>
+      <a id="panel-link" class="panel-link" href="#">Full static report for this float &rarr;</a>
+    </div>
+    <ul id="float-list" class="site-list"></ul>
+  </div>
+</div>
 
 <h2>Overview</h2>
+<p>Methodology: the Iceland 2&nbsp;km ROMS daily-average output is colocated
+with Argo float profiles at the nearest ocean grid cell and closest daily
+model record in time; floats farther than 50&nbsp;km from any model grid cell
+are excluded.</p>
 <div class="gallery">
-  <figure class="card">
-    <a href="../assets/img/overview/float_roms_colocation_map.png">
-      <img loading="lazy" src="../assets/img/overview/float_roms_colocation_map.png" alt="Map of colocated Argo floats over the model domain"></a>
-    <figcaption>Float positions colocated with the model domain</figcaption>
-  </figure>
   <figure class="card">
     <a href="../assets/img/overview/TS_all_floats.png">
       <img loading="lazy" src="../assets/img/overview/TS_all_floats.png" alt="Combined T-S diagram, all floats"></a>
@@ -50,52 +77,14 @@ Floats farther than 50&nbsp;km from any model grid cell are excluded.</p>
   </figure>
 </div>
 
-<h2>Floats (36 total)</h2>
-<table class="float-table">
-  <thead><tr><th></th><th>WMO ID</th><th>Lat (&deg;N)</th><th>Lon (&deg;E)</th><th>Colocated days</th></tr></thead>
-  <tbody>
-<tr><td><a href="float_3901851.html"><img class="thumb" loading="lazy" src="../assets/img/floats/3901851/TS.png" alt=""></a></td><td><a href="float_3901851.html">3901851</a></td><td>68.1284</td><td>-21.7297</td><td>128</td></tr>
-<tr><td><a href="float_3901988.html"><img class="thumb" loading="lazy" src="../assets/img/floats/3901988/TS.png" alt=""></a></td><td><a href="float_3901988.html">3901988</a></td><td>68.0896</td><td>-14.7193</td><td>77</td></tr>
-<tr><td><a href="float_4902117.html"><img class="thumb" loading="lazy" src="../assets/img/floats/4902117/TS.png" alt=""></a></td><td><a href="float_4902117.html">4902117</a></td><td>61.6136</td><td>-19.9982</td><td>367</td></tr>
-<tr><td><a href="float_4902119.html"><img class="thumb" loading="lazy" src="../assets/img/floats/4902119/TS.png" alt=""></a></td><td><a href="float_4902119.html">4902119</a></td><td>62.6748</td><td>-25.1938</td><td>310</td></tr>
-<tr><td><a href="float_5903392.html"><img class="thumb" loading="lazy" src="../assets/img/floats/5903392/TS.png" alt=""></a></td><td><a href="float_5903392.html">5903392</a></td><td>60.6233</td><td>-27.2296</td><td>10</td></tr>
-<tr><td><a href="float_5903395.html"><img class="thumb" loading="lazy" src="../assets/img/floats/5903395/TS.png" alt=""></a></td><td><a href="float_5903395.html">5903395</a></td><td>63.745</td><td>-26.6827</td><td>133</td></tr>
-<tr><td><a href="float_5904173.html"><img class="thumb" loading="lazy" src="../assets/img/floats/5904173/TS.png" alt=""></a></td><td><a href="float_5904173.html">5904173</a></td><td>61.5013</td><td>-21.6211</td><td>361</td></tr>
-<tr><td><a href="float_5904176.html"><img class="thumb" loading="lazy" src="../assets/img/floats/5904176/TS.png" alt=""></a></td><td><a href="float_5904176.html">5904176</a></td><td>62.0271</td><td>-28.9024</td><td>284</td></tr>
-<tr><td><a href="float_6900429.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6900429/TS.png" alt=""></a></td><td><a href="float_6900429.html">6900429</a></td><td>62.0136</td><td>-21.1061</td><td>367</td></tr>
-<tr><td><a href="float_6901129.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901129/TS.png" alt=""></a></td><td><a href="float_6901129.html">6901129</a></td><td>67.6986</td><td>-21.2903</td><td>217</td></tr>
-<tr><td><a href="float_6901167.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901167/TS.png" alt=""></a></td><td><a href="float_6901167.html">6901167</a></td><td>62.9123</td><td>-29.8886</td><td>0</td></tr>
-<tr><td><a href="float_6901169.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901169/TS.png" alt=""></a></td><td><a href="float_6901169.html">6901169</a></td><td>64.4821</td><td>-29.7435</td><td>20</td></tr>
-<tr><td><a href="float_6901170.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901170/TS.png" alt=""></a></td><td><a href="float_6901170.html">6901170</a></td><td>62.3536</td><td>-20.0141</td><td>290</td></tr>
-<tr><td><a href="float_6901176.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901176/TS.png" alt=""></a></td><td><a href="float_6901176.html">6901176</a></td><td>60.207</td><td>-26.5457</td><td>40</td></tr>
-<tr><td><a href="float_6901190.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901190/TS.png" alt=""></a></td><td><a href="float_6901190.html">6901190</a></td><td>65.1887</td><td>-28.9308</td><td>40</td></tr>
-<tr><td><a href="float_6901191.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901191/timeseries.png" alt=""></a></td><td><a href="float_6901191.html">6901191</a></td><td>62.4609</td><td>-29.0026</td><td>269</td></tr>
-<tr><td><a href="float_6901194.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901194/TS.png" alt=""></a></td><td><a href="float_6901194.html">6901194</a></td><td>62.2648</td><td>-29.2863</td><td>249</td></tr>
-<tr><td><a href="float_6901201.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901201/TS.png" alt=""></a></td><td><a href="float_6901201.html">6901201</a></td><td>60.4675</td><td>-25.3605</td><td>190</td></tr>
-<tr><td><a href="float_6901208.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901208/TS.png" alt=""></a></td><td><a href="float_6901208.html">6901208</a></td><td>62.0595</td><td>-18.493</td><td>64</td></tr>
-<tr><td><a href="float_6901564.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901564/TS.png" alt=""></a></td><td><a href="float_6901564.html">6901564</a></td><td>62.0866</td><td>-20.8513</td><td>368</td></tr>
-<tr><td><a href="float_6901566.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901566/TS.png" alt=""></a></td><td><a href="float_6901566.html">6901566</a></td><td>63.9008</td><td>-29.8247</td><td>30</td></tr>
-<tr><td><a href="float_6901724.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901724/TS.png" alt=""></a></td><td><a href="float_6901724.html">6901724</a></td><td>61.6806</td><td>-20.6062</td><td>167</td></tr>
-<tr><td><a href="float_6901752.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901752/TS.png" alt=""></a></td><td><a href="float_6901752.html">6901752</a></td><td>61.1325</td><td>-21.5957</td><td>239</td></tr>
-<tr><td><a href="float_6901910.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901910/TS.png" alt=""></a></td><td><a href="float_6901910.html">6901910</a></td><td>67.3413</td><td>-14.3889</td><td>361</td></tr>
-<tr><td><a href="float_6901921.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901921/TS.png" alt=""></a></td><td><a href="float_6901921.html">6901921</a></td><td>62.0418</td><td>-20.3081</td><td>365</td></tr>
-<tr><td><a href="float_6901923.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6901923/TS.png" alt=""></a></td><td><a href="float_6901923.html">6901923</a></td><td>62.5117</td><td>-24.6331</td><td>363</td></tr>
-<tr><td><a href="float_6902694.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902694/TS.png" alt=""></a></td><td><a href="float_6902694.html">6902694</a></td><td>61.6459</td><td>-26.8881</td><td>363</td></tr>
-<tr><td><a href="float_6902726.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902726/TS.png" alt=""></a></td><td><a href="float_6902726.html">6902726</a></td><td>68.1244</td><td>-14.6631</td><td>277</td></tr>
-<tr><td><a href="float_6902728.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902728/TS.png" alt=""></a></td><td><a href="float_6902728.html">6902728</a></td><td>68.395</td><td>-23.1508</td><td>147</td></tr>
-<tr><td><a href="float_6902730.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902730/TS.png" alt=""></a></td><td><a href="float_6902730.html">6902730</a></td><td>68.4938</td><td>-19.1498</td><td>367</td></tr>
-<tr><td><a href="float_6902754.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902754/TS.png" alt=""></a></td><td><a href="float_6902754.html">6902754</a></td><td>62.5268</td><td>-28.5326</td><td>250</td></tr>
-<tr><td><a href="float_6902755.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902755/TS.png" alt=""></a></td><td><a href="float_6902755.html">6902755</a></td><td>63.0087</td><td>-29.0013</td><td>70</td></tr>
-<tr><td><a href="float_6902808.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902808/TS.png" alt=""></a></td><td><a href="float_6902808.html">6902808</a></td><td>62.8442</td><td>-29.323</td><td>341</td></tr>
-<tr><td><a href="float_6902868.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902868/TS.png" alt=""></a></td><td><a href="float_6902868.html">6902868</a></td><td>64.0039</td><td>-29.5546</td><td>122</td></tr>
-<tr><td><a href="float_6902910.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902910/TS.png" alt=""></a></td><td><a href="float_6902910.html">6902910</a></td><td>67.922</td><td>-19.1503</td><td>51</td></tr>
-<tr><td><a href="float_6902912.html"><img class="thumb" loading="lazy" src="../assets/img/floats/6902912/TS.png" alt=""></a></td><td><a href="float_6902912.html">6902912</a></td><td>67.5956</td><td>-15.0268</td><td>123</td></tr>
-  </tbody>
-</table>
 </main>
 <footer class="site-footer">
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="../assets/js/util.js"></script>
+<script src="../assets/js/argo-explorer.js"></script>
 </body>
 </html>

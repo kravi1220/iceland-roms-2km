@@ -8,24 +8,49 @@ against independent observations (Argo floats, moorings). Modeled after
 Live site: `https://kravi1220.github.io/iceland-roms-2km/` (once GitHub Pages
 is enabled, see below).
 
+`argo/index.html` and `moorings.html` are interactive: a [Leaflet](https://leafletjs.com)
+map of the model's own bathymetry (rendered from the grid NetCDF, not a static
+figure) with clickable Argo float / mooring markers, and a [Plotly](https://plotly.com/javascript/)
+time-series panel (depth/variable selectors, built-in zoom & range slider) fed
+by small per-site JSON files. No backend — everything is static and loads
+client-side.
+
 ## Contents
 
-- `index.html`, `about.html`, `moorings.html` — hand-written static pages.
-- `argo/` — the ROMS-vs-Argo gallery. `argo/index.html` and the 36
-  `argo/float_<WMO_ID>.html` pages are generated (see below); don't hand-edit them.
-- `assets/img/` — figures (bathymetry map, per-float comparison plots, overview
-  skill diagrams).
+- `index.html`, `about.html` — hand-written pages. `about.html` embeds the same
+  interactive bathymetry map (no markers).
+- `argo/index.html`, `moorings.html` — the interactive map/chart explorers.
+- `argo/float_<WMO_ID>.html` — 36 generated static per-float report pages
+  (fallback/detail view linked from the explorer); don't hand-edit them.
+- `assets/js/util.js` — shared map/legend helpers.
+- `assets/js/argo-explorer.js`, `assets/js/mooring-explorer.js` — the two
+  interactive explorers.
+- `assets/img/` — figures (per-float comparison plots, overview skill diagrams,
+  the bathymetry overlay PNG).
+- `data/argo_floats.json`, `data/argo/<id>.json` — per-float colocated time
+  series for the Argo explorer.
+- `data/moorings.json`, `data/moorings/<key>_<deployment>.json` — per-mooring
+  colocated time series for the moorings explorer.
+- `data/bathymetry_overlay.json` — geographic bounds/colour-scale for the
+  bathymetry image overlay.
 - `data/float_metadata.csv` — float WMO ID, position and number of colocated
-  days, used to build the Argo pages.
-- `scripts/generate_argo_pages.py` — regenerates `argo/index.html` and the
-  per-float pages from `data/float_metadata.csv` and `assets/img/floats/`.
+  days, used to build the static float report pages.
+- `scripts/generate_argo_pages.py` — regenerates `argo/float_<id>.html` from
+  `data/float_metadata.csv` and `assets/img/floats/`.
+- `scripts/export_argo_json.py` — regenerates the Argo explorer's JSON from
+  the ROMS-Argo colocation NetCDFs.
+- `scripts/generate_bathymetry_overlay.py` — regenerates the bathymetry PNG +
+  bounds JSON directly from `iceland2km_grid.nc`.
+- `../roms_mooring_validation.py` (in the parent working directory, not part
+  of this repo) — the ROMS-vs-mooring colocation pipeline; regenerates
+  `mooring_plots/*.png` and this repo's `data/moorings*.json`.
 
-## Regenerating the Argo pages
-
-If float images or metadata change, regenerate the pages:
+## Regenerating the data
 
 ```bash
-python3 scripts/generate_argo_pages.py
+python3 scripts/generate_argo_pages.py         # static per-float report pages
+python3 scripts/export_argo_json.py            # Argo explorer JSON
+python3 scripts/generate_bathymetry_overlay.py # bathymetry overlay PNG + JSON
 ```
 
 ## Local preview
@@ -44,8 +69,10 @@ then open `http://localhost:8000/`.
 
 ## Status
 
-- **ROMS vs Argo floats**: complete (36 colocated floats).
-- **ROMS vs moorings**: in progress — see [moorings.html](moorings.html).
+- **ROMS vs Argo floats**: complete, interactive (36 colocated floats, 35 with time series).
+- **ROMS vs moorings**: complete, interactive (7 station-deployments across 5 mooring sites).
+  The ROMS daily-average archive used covers Dec 2017&ndash;Dec 2018, so the
+  2018&ndash;2019 mooring deployments only overlap for their first few months.
 
 ## About the model
 

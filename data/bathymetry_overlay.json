@@ -1,0 +1,17 @@
+{
+  "bounds": [
+    [
+      57.54371839020479,
+      -33.5
+    ],
+    [
+      72.3811091382995,
+      0.49048188266907583
+    ]
+  ],
+  "vmin": 0.0,
+  "vmax": 3647.668934478178,
+  "cmap": "viridis_r",
+  "depth_label": "Depth (m)",
+  "source": "iceland2km_grid.nc (HAFRO ROMS Iceland 2km grid): variables h, mask_rho, lon_rho, lat_rho"
+}

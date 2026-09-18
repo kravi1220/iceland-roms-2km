@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>About the Model · Iceland ROMS 2km</title>
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
 <header class="site-header">
@@ -36,10 +37,11 @@ Iceland&ndash;Faroe shelf regions, using ROMS terrain-following (sigma)
 vertical coordinates. The grid was built at the Icelandic Marine and
 Freshwater Research Institute (Hafrannsóknastofnun, HAFRO).</p>
 
-<figure class="full">
-  <img src="assets/img/overview/iceland2km_bathymetry.png" alt="Iceland 2km ROMS model bathymetry and domain">
-  <figcaption>Model bathymetry over the full domain.</figcaption>
-</figure>
+<div id="map" style="height:520px; border-radius:10px; border:1px solid var(--border);"></div>
+<div id="legend"></div>
+<p class="meta" style="font-size:0.85rem;">Rendered directly from the model grid
+(<code>iceland2km_grid.nc</code>: <code>h</code>, <code>mask_rho</code>,
+<code>lon_rho</code>/<code>lat_rho</code>) &mdash; pan and zoom to explore the domain.</p>
 
 <h2>ROMS</h2>
 <p>ROMS is a free-surface, terrain-following, primitive-equation community
@@ -58,5 +60,15 @@ for the site source and the scripts used to generate these comparisons.</p>
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="assets/js/util.js"></script>
+<script>
+(async function () {
+  const bathy = await loadJSON("data/bathymetry_overlay.json");
+  const map = L.map("map", { scrollWheelZoom: false });
+  addBathyLayer(map, bathy, "assets/img/overview/bathymetry_overlay.png");
+  renderLegend(bathy, "legend");
+})();
+</script>
 </body>
 </html>

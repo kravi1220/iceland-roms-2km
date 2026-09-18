@@ -1,0 +1,128 @@
+[
+  {
+    "key": "hb2",
+    "name": "HB2",
+    "deployment": "2017-2018",
+    "lat": 66.99833333333333,
+    "lon": -21.541166666666665,
+    "bdepth": 204,
+    "dist_km": 0.87,
+    "mc_depths": [
+      77,
+      161
+    ],
+    "adcp_depths": [
+      1,
+      81,
+      153
+    ],
+    "file": "hb2_2017-2018.json"
+  },
+  {
+    "key": "hb3",
+    "name": "HB3",
+    "deployment": "2017-2018",
+    "lat": 67.1455,
+    "lon": -21.303433333333334,
+    "bdepth": 232,
+    "dist_km": 0.41,
+    "mc_depths": [
+      91,
+      200
+    ],
+    "adcp_depths": [
+      5,
+      93,
+      181
+    ],
+    "file": "hb3_2017-2018.json"
+  },
+  {
+    "key": "hb4",
+    "name": "HB4",
+    "deployment": "2017-2018",
+    "lat": 67.2851,
+    "lon": -21.296566666666667,
+    "bdepth": 287,
+    "dist_km": 0.26,
+    "mc_depths": [],
+    "adcp_depths": [
+      6,
+      78,
+      150
+    ],
+    "file": "hb4_2017-2018.json"
+  },
+  {
+    "key": "sl2_2",
+    "name": "SL2_2",
+    "deployment": "2017-2018",
+    "lat": 67.37466666666667,
+    "lon": -16.143933333333333,
+    "bdepth": 660,
+    "dist_km": 0.27,
+    "mc_depths": [
+      447,
+      633
+    ],
+    "adcp_depths": [
+      2,
+      290,
+      562
+    ],
+    "file": "sl2_2_2017-2018.json"
+  },
+  {
+    "key": "ds1",
+    "name": "DS1",
+    "deployment": "2018-2019",
+    "lat": 66.07833333333333,
+    "lon": -27.081,
+    "bdepth": 651,
+    "dist_km": 0.73,
+    "mc_depths": [],
+    "adcp_depths": [
+      8,
+      280,
+      552
+    ],
+    "file": "ds1_2018-2019.json"
+  },
+  {
+    "key": "hb2",
+    "name": "HB2",
+    "deployment": "2018-2019",
+    "lat": 66.99651666666666,
+    "lon": -21.542583333333333,
+    "bdepth": 198,
+    "dist_km": 1.04,
+    "mc_depths": [
+      169
+    ],
+    "adcp_depths": [
+      1,
+      73,
+      145
+    ],
+    "file": "hb2_2018-2019.json"
+  },
+  {
+    "key": "hb3",
+    "name": "HB3",
+    "deployment": "2018-2019",
+    "lat": 67.14551666666667,
+    "lon": -21.303733333333334,
+    "bdepth": 232,
+    "dist_km": 0.41,
+    "mc_depths": [
+      224,
+      235
+    ],
+    "adcp_depths": [
+      5,
+      93,
+      181
+    ],
+    "file": "hb3_2018-2019.json"
+  }
+]
