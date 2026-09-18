@@ -32,6 +32,7 @@ HEAD = """<!doctype html>
     <a href="{about}">About the Model</a>
     <a href="{argo_index}" class="active">ROMS vs Argo</a>
     <a href="{moorings}">ROMS vs Moorings</a>
+    <a href="{sst_sss}">SST &amp; SSS</a>
   </nav>
 </header>
 <main>
@@ -83,6 +84,7 @@ def float_page(fid: str, lon: str, lat: str, n_days: str, have: dict) -> str:
         about="../about.html",
         argo_index="index.html",
         moorings="../moorings.html",
+        sst_sss="../sst_sss.html",
     )
     body += f"""
 <a class="back-link" href="index.html">&larr; All floats</a>
