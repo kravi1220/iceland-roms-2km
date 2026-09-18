@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROMS vs Satellite SST &amp; SSS · Iceland ROMS 2km</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html">Iceland ROMS 2km</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About the Model</a>
+    <a href="argo/index.html">ROMS vs Argo</a>
+    <a href="moorings.html">ROMS vs Moorings</a>
+    <a href="sst_sss.html" class="active">SST &amp; SSS</a>
+  </nav>
+</header>
+<main>
+
+<h1>ROMS vs Satellite SST &amp; SSS</h1>
+<p class="lede">Daily sea surface temperature and salinity from the model,
+compared side by side with satellite observations. Pick a date to see that
+day's field.</p>
+
+<div class="panel" style="max-width:100%;">
+  <div class="panel-controls" style="align-items:flex-end;">
+    <div>
+      <label for="sst-sss-var-select">Variable</label>
+      <select id="sst-sss-var-select">
+        <option value="sst">Sea surface temperature</option>
+        <option value="sss">Sea surface salinity</option>
+      </select>
+    </div>
+    <div style="flex:1; min-width:220px;">
+      <label for="date-slider">Date: <strong id="date-label"></strong></label>
+      <input type="range" id="date-slider" style="width:100%;" min="0" max="0" value="0">
+    </div>
+    <div>
+      <button id="date-prev" type="button">&larr; Prev</button>
+      <button id="date-next" type="button">Next &rarr;</button>
+    </div>
+  </div>
+  <img id="sst-sss-img" src="" alt="ROMS vs satellite comparison" style="width:100%; border-radius:8px; border:1px solid var(--border);">
+  <p id="sat-date-note" class="meta" style="font-size:0.82rem; margin-top:0.5rem;"></p>
+</div>
+
+<h2>Sources &amp; methodology</h2>
+<p>ROMS surface temperature/salinity are daily snapshots from the model's
+history archive (Dec 2017&ndash;Dec 2018). Satellite SST is the NOAA daily
+optimum-interpolation AVHRR product; satellite SSS is the CMEMS multi-sensor
+(SMOS/SMAP) sea surface salinity product. Each satellite field is matched to
+the nearest available day to the selected ROMS date (usually the same day).
+Comparisons are shown every 3 days across the model record.</p>
+
+</main>
+<footer class="site-footer">
+  <div class="footer-brand">
+    <img src="assets/img/brand/mfri_logo.png" alt="MFRI logo">
+    <span>Marine and Freshwater Research Institute<br>Hafrannsóknastofnun (HAFRO)</span>
+  </div>
+  <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
+  Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
+</footer>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/sst-sss-explorer.js"></script>
+</body>
+</html>
