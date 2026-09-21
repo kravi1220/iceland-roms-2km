@@ -448,3 +448,5 @@ input[type="range"] { accent-color: var(--accent); }
 .sources li { margin-bottom:0.5rem; }
 .section-card .card-art.photo { background:#fff; border:1px solid var(--border); }
 .section-card .card-art.photo img { width:100%; height:260px; object-fit:contain; border:0; border-radius:0; margin:0; max-height:none; display:block; }
+.section-card .card-art.photo.sat { background:#000; }
+.section-card .card-art.photo.sat img { height:190px; object-fit:cover; }
