@@ -20,6 +20,8 @@ HEAD = """<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.tile.openstreetmap.org; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} · Iceland ROMS 2km</title>
 <link rel="stylesheet" href="{css}">
@@ -86,7 +88,7 @@ def float_page(fid: str, lon: str, lat: str, n_days: str, have: dict) -> str:
 
     body = HEAD.format(
         title=f"Argo float {fid}",
-        css="../assets/css/style.css",
+        css="../assets/css/style.css?v=8",
         home="../index.html",
         about="../about.html",
         argo_index="index.html",

@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.tile.openstreetmap.org; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROMS-CICE · Iceland ROMS 2km</title>
-<link rel="stylesheet" href="assets/css/style.css?v=6">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body>
 <header class="site-header">
@@ -119,7 +121,7 @@ satellites:</p>
 <h2>Follow the project</h2>
 <p>Results, figures and interactive comparisons will appear on this page as
 they become available. For questions or collaboration, contact
-<a href="mailto:kumar.ravi.prakash@hafogvatn.is">Dr Kumar Ravi Prakash</a>
+<a href="#" data-mail-user="kumar.ravi.prakash" data-mail-domain="hafogvatn.is">Dr Kumar Ravi Prakash</a>
 (<a href="https://www.hafogvatn.is" target="_blank" rel="noopener">MFRI / HAFRO</a>).</p>
 
 <div class="disclaimer">This work is in progress; no results are available yet. Check back later.</div>
@@ -133,7 +135,7 @@ they become available. For questions or collaboration, contact
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
+<script src="assets/js/site.js"></script>
 <script src="assets/js/util.js?v=2"></script>
-<script src="assets/js/sst-sss-explorer.js"></script>
 </body>
 </html>

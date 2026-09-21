@@ -77,6 +77,9 @@ client-side.
   style of [ocean.met.no](https://ocean.met.no) / [CenCOOS](https://www.cencoos.org))
   links out to `hafogvatn.is`; use the nav links for in-site navigation.
 
+- `vendor/` — self-hosted Leaflet, Plotly.js and web fonts (no CDN requests);
+  see `SECURITY.md` for the Content Security Policy and other hardening.
+
 ## Regenerating the data
 
 ```bash

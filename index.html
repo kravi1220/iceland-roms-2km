@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://*.tile.openstreetmap.org; font-src 'self'; connect-src 'self'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iceland ROMS 2km</title>
 <meta name="description" content="An open ROMS ocean model implementation for the seas around Iceland at 2 km resolution, with validation against Argo floats and moorings.">
-<link rel="stylesheet" href="assets/css/style.css?v=6">
+<link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body>
 <header class="site-header">
@@ -132,7 +134,7 @@ southeast. Drag to rotate, scroll to zoom.</p>
   <div>
     <strong class="contact-name">Dr Kumar Ravi Prakash</strong>
     <p class="contact-role">Model development &amp; validation &middot; Marine and Freshwater Research Institute (HAFRO)</p>
-    <p class="contact-email">&#9993; <a href="mailto:kumar.ravi.prakash@hafogvatn.is">kumar.ravi.prakash@hafogvatn.is</a></p>
+    <p class="contact-email">&#9993; <a href="#" data-mail-user="kumar.ravi.prakash" data-mail-domain="hafogvatn.is" data-mail-show>[enable JavaScript to see e-mail]</a></p>
     <p class="meta" style="margin:0.3rem 0 0; font-size:0.85rem;">For questions about the model.</p>
   </div>
 </div>
@@ -146,7 +148,8 @@ southeast. Drag to rotate, scroll to zoom.</p>
   <p>ROMS Iceland 2&nbsp;km &mdash; experimental model output, research use only.
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script src="vendor/plotly.min.js"></script>
+<script src="assets/js/site.js"></script>
 <script src="assets/js/util.js?v=2"></script>
 <script src="assets/js/bathymetry-3d.js?v=2"></script>
 </body>
