@@ -58,23 +58,69 @@ northern part of the domain.</p>
 </div>
 <p class="meta" style="font-size:0.85rem; margin-top:0.5rem;">Cartoon illustration of sea-ice floes around Iceland; not model output.</p>
 
-<h2>What is being developed</h2>
-<p>The current Iceland ROMS configuration is ocean-only. Sea ice matters for
-the region &mdash; polar water and drift ice from the East Greenland Current
-reach the Denmark Strait and the north Icelandic shelf, and ice cover
-controls air&ndash;sea exchange of heat and momentum and freshwater input.
-We are coupling ROMS to the
-<a href="https://github.com/CICE-Consortium/CICE" target="_blank" rel="noopener">CICE</a>
-sea-ice model, which represents ice thickness distribution, drift, growth
-and melt, so that ocean and ice evolve together.</p>
-
-<h2>Planned</h2>
+<h2>Why sea ice matters around Iceland</h2>
+<p>Iceland sits at the boundary between warm Atlantic water and cold, fresh
+Polar water. The East Greenland Current carries Polar water and, in some years,
+drift ice southward through the Denmark Strait, and the north Icelandic shelf
+can be affected in cold years. Sea ice changes the ocean in several ways:</p>
 <ul class="sources">
-<li>Coupled ROMS&ndash;CICE simulation on the existing 2&nbsp;km Iceland grid.</li>
-<li>Validation of ice extent and concentration against satellite products.</li>
-<li>Effects of sea ice on Denmark Strait and north Icelandic shelf hydrography.</li>
-<li>Results published here alongside the existing Argo, mooring and satellite comparisons.</li>
+<li><strong>Insulation &amp; albedo</strong> &mdash; ice cover cuts the exchange of heat between ocean and atmosphere and reflects incoming sunlight.</li>
+<li><strong>Freshwater and salt</strong> &mdash; melting adds freshwater and stratifies the surface layer; freezing rejects brine and can drive convection.</li>
+<li><strong>Momentum</strong> &mdash; ice drift transfers wind stress to the ocean differently than open water does.</li>
+<li><strong>Ecosystems &amp; fisheries</strong> &mdash; ice-edge position and surface stratification affect the timing of the spring bloom and, in turn, the marine food web that HAFRO monitors.</li>
 </ul>
+
+<h2>What is being developed</h2>
+<p>The current Iceland ROMS configuration is ocean-only, so sea ice and its
+effects have to be prescribed or ignored. We are coupling ROMS to the
+<a href="https://github.com/CICE-Consortium/CICE" target="_blank" rel="noopener">CICE</a>
+sea-ice model, which represents ice thickness distribution, drift (with
+elastic&ndash;viscous&ndash;plastic rheology), growth and melt, so that the
+ocean and ice evolve together on the same 2&nbsp;km grid.</p>
+
+<h2>How the coupling works</h2>
+<p>At every coupling step the two models exchange the fields below
+(schematic &mdash; details may change as development proceeds).</p>
+<table class="float-table">
+  <thead><tr><th>ROMS (ocean) &rarr; CICE (ice)</th><th>CICE (ice) &rarr; ROMS (ocean)</th></tr></thead>
+  <tbody>
+    <tr><td>Sea surface temperature and salinity</td><td>Heat flux through the ice/ocean interface</td></tr>
+    <tr><td>Surface currents</td><td>Freshwater flux (melt, freeze, brine rejection)</td></tr>
+    <tr><td>Sea surface slope</td><td>Ice&ndash;ocean stress (momentum)</td></tr>
+    <tr><td>Freezing-point heat deficit</td><td>Ice-modified shortwave radiation</td></tr>
+  </tbody>
+</table>
+<p>Atmospheric forcing (winds, air temperature, humidity, radiation,
+precipitation) drives both components.</p>
+
+<h2>Development roadmap</h2>
+<table class="float-table">
+  <thead><tr><th>Stage</th><th>Description</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Ocean-only Iceland 2&nbsp;km ROMS, validated against Argo, moorings and satellite data</td><td><span class="status ready" style="display:inline-block;padding:0.1rem 0.5rem;border-radius:999px;font-size:0.75rem;">Done</span></td></tr>
+    <tr><td>2</td><td>Configure CICE on the ROMS grid and set up the ROMS&ndash;CICE coupling</td><td><span class="status progress" style="display:inline-block;padding:0.1rem 0.5rem;border-radius:999px;font-size:0.75rem;">In progress</span></td></tr>
+    <tr><td>3</td><td>Test simulations and tuning (ice concentration, thickness, drift)</td><td><span class="meta">Planned</span></td></tr>
+    <tr><td>4</td><td>Multi-year validation and comparison with the ocean-only run</td><td><span class="meta">Planned</span></td></tr>
+    <tr><td>5</td><td>Publish results on this website</td><td><span class="meta">Planned</span></td></tr>
+  </tbody>
+</table>
+
+<h2>How it will be evaluated</h2>
+<p>Sea-ice results will be compared against independent observations in the same
+way as the ocean-only model is compared here against Argo floats, moorings and
+satellites:</p>
+<ul class="sources">
+<li>Ice concentration and extent from satellite passive-microwave products (for example <a href="https://osi-saf.eumetsat.int" target="_blank" rel="noopener">EUMETSAT OSI SAF</a> and <a href="https://nsidc.org" target="_blank" rel="noopener">NSIDC</a>).</li>
+<li>Ice thickness from satellite altimetry and SMOS where available.</li>
+<li>Hydrography in ice-influenced areas from Argo floats and the Denmark Strait and shelf moorings.</li>
+<li>Skill relative to the ocean-only ROMS run, to show what sea ice adds.</li>
+</ul>
+
+<h2>Follow the project</h2>
+<p>Results, figures and interactive comparisons will appear on this page as
+they become available. For questions or collaboration, contact
+<a href="mailto:kumar.ravi.prakash@hafogvatn.is">Dr Kumar Ravi Prakash</a>
+(<a href="https://www.hafogvatn.is" target="_blank" rel="noopener">MFRI / HAFRO</a>).</p>
 
 <div class="disclaimer">This work is in progress; no results are available yet. Check back later.</div>
 
