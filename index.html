@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Iceland ROMS 2km</title>
 <meta name="description" content="An open ROMS ocean model implementation for the seas around Iceland at 2 km resolution, with validation against Argo floats and moorings.">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=2">
 </head>
 <body>
 <header class="site-header">
@@ -52,51 +52,50 @@ applications, with ongoing validation against independent observations.</p>
     <p>Domain, resolution, bathymetry and the institution behind the model.</p>
   </a>
 
-  <a class="section-card" href="argo/index.html" style="color:inherit;text-decoration:none;">
-    <div class="card-icon" title="Argo float" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="12" y1="2" x2="12" y2="5"/>
-        <rect x="8" y="5" width="8" height="14" rx="4"/>
-        <line x1="8" y1="12" x2="16" y2="12"/>
-      </svg>
-    </div>
+  <div class="section-card linked">
+    <a class="card-art" href="https://argo.ucsd.edu" target="_blank" rel="noopener" title="Data source: Argo Program (argo.ucsd.edu)">
+      <svg viewBox="0 0 240 130" role="img" aria-label="Illustration of an Argo profiling float" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe9f5"/><stop offset="1" stop-color="#0b4f7a"/></linearGradient></defs><rect width="240" height="130" fill="url(#gA)"/>
+<line x1="0" y1="34" x2="240" y2="34" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+<line x1="120" y1="10" x2="120" y2="30" stroke="#fff" stroke-width="2"/><circle cx="120" cy="8" r="3" fill="#fff"/>
+<rect x="108" y="30" width="24" height="62" rx="12" fill="#f4f6f8" stroke="#33414d" stroke-width="2"/>
+<rect x="108" y="66" width="24" height="9" fill="#e5732b"/>
+<path d="M120 100v14m-8-6 8 8 8-8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-dasharray="1 0"/>
+<circle cx="52" cy="70" r="3" fill="#fff" fill-opacity=".5"/><circle cx="190" cy="90" r="2.5" fill="#fff" fill-opacity=".5"/><circle cx="170" cy="60" r="2" fill="#fff" fill-opacity=".5"/></svg>
+    </a>
     <span class="status ready">Ready</span>
-    <h3>ROMS vs Argo Floats</h3>
-    <p>36 colocated Argo floats: depth profiles, fixed-depth time series and
-    Hovm&ouml;ller sections compared against the model.</p>
-  </a>
-
-  <a class="section-card" href="moorings.html" style="color:inherit;text-decoration:none;">
-    <div class="card-icon" title="Mooring" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="5" r="2"/>
-        <line x1="12" y1="7" x2="12" y2="21"/>
-        <line x1="8" y1="9" x2="16" y2="9"/>
-        <path d="M5 12H2a10 10 0 0 0 10 10 10 10 0 0 0 10-10h-3"/>
-      </svg>
-    </div>
+    <h3><a class="stretch" href="argo/index.html">ROMS vs Argo Floats</a></h3>
+    <p>36 colocated Argo floats: depth profiles, fixed-depth time series and Hovm&ouml;ller sections compared against the model.</p>
+    <p class="src">Data source: <a href="https://argo.ucsd.edu" target="_blank" rel="noopener">Argo Program (argo.ucsd.edu) &#8599;</a></p>
+  </div>
+  <div class="section-card linked">
+    <a class="card-art" href="https://www.hafogvatn.is" target="_blank" rel="noopener" title="Data source: HAFRO / MFRI moorings (hafogvatn.is)">
+      <svg viewBox="0 0 240 130" role="img" aria-label="Illustration of an oceanographic mooring" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cfe9f5"/><stop offset="1" stop-color="#0b3d63"/></linearGradient></defs><rect width="240" height="130" fill="url(#gM)"/>
+<line x1="0" y1="30" x2="240" y2="30" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
+<path d="M112 30l8-16 8 16z" fill="#e5732b" stroke="#33414d" stroke-width="1.5"/><rect x="110" y="30" width="20" height="8" rx="2" fill="#f4f6f8" stroke="#33414d" stroke-width="1.5"/>
+<line x1="120" y1="38" x2="120" y2="112" stroke="#dbe6ee" stroke-width="2"/>
+<ellipse cx="120" cy="60" rx="7" ry="10" fill="#f2c94c" stroke="#33414d" stroke-width="1.5"/>
+<rect x="114" y="82" width="12" height="14" rx="3" fill="#e5732b" stroke="#33414d" stroke-width="1.5"/>
+<path d="M104 118h32l-6-8h-20z" fill="#5c6670"/></svg>
+    </a>
     <span class="status ready">Ready</span>
-    <h3>ROMS vs Moorings</h3>
-    <p>7 station-deployments (ADCP currents, MicroCat temperature/salinity)
-    from five mooring sites around Iceland, 2017&ndash;2019, colocated with the model.</p>
-  </a>
-
-  <a class="section-card" href="sst_sss.html" style="color:inherit;text-decoration:none;">
-    <div class="card-icon" title="Satellite" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m13 7 9 9-3 3-9-9z"/>
-        <path d="m4 16 4-4 3 3-4 4z"/>
-        <path d="m14 10 1-1"/>
-        <path d="M13 22a3 3 0 0 1-3-3"/>
-        <path d="M2 13a3 3 0 0 1 3-3"/>
-      </svg>
-    </div>
+    <h3><a class="stretch" href="moorings.html">ROMS vs Moorings</a></h3>
+    <p>7 station-deployments (ADCP currents, MicroCat temperature/salinity) from five mooring sites around Iceland, 2017&ndash;2019, colocated with the model.</p>
+    <p class="src">Data source: <a href="https://www.hafogvatn.is" target="_blank" rel="noopener">HAFRO / MFRI moorings (hafogvatn.is) &#8599;</a></p>
+  </div>
+  <div class="section-card linked">
+    <a class="card-art" href="https://data.marine.copernicus.eu" target="_blank" rel="noopener" title="Data source: NOAA AVHRR OISST &amp; Copernicus Marine">
+      <svg viewBox="0 0 240 130" role="img" aria-label="Illustration of an Earth-observing satellite" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="gS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#08203b"/><stop offset="1" stop-color="#0b5d8f"/></linearGradient></defs><rect width="240" height="130" fill="url(#gS)"/>
+<circle cx="200" cy="112" r="70" fill="#1f88c2"/><path d="M150 104q20-14 42-8t40 4v40h-90z" fill="#3aa657" fill-opacity=".8"/>
+<g transform="translate(78 46) rotate(-28)"><rect x="-10" y="-8" width="20" height="16" rx="2" fill="#dfe5ea" stroke="#33414d" stroke-width="1.5"/>
+<rect x="-42" y="-6" width="28" height="12" fill="#2d6bb3" stroke="#dfe5ea" stroke-width="1"/><rect x="14" y="-6" width="28" height="12" fill="#2d6bb3" stroke="#dfe5ea" stroke-width="1"/></g>
+<path d="M92 66q30 24 54 40" stroke="#fff" stroke-opacity=".6" stroke-width="1.5" stroke-dasharray="3 4" fill="none"/>
+<circle cx="30" cy="20" r="1.5" fill="#fff"/><circle cx="60" cy="100" r="1.5" fill="#fff"/><circle cx="130" cy="16" r="1.5" fill="#fff"/></svg>
+    </a>
     <span class="status ready">Ready</span>
-    <h3>ROMS vs Satellite SST &amp; SSS</h3>
-    <p>Daily sea surface temperature and salinity maps against AVHRR and CMEMS
-    satellite products &mdash; pick any date to compare.</p>
-  </a>
-
+    <h3><a class="stretch" href="sst_sss.html">ROMS vs Satellite SST &amp; SSS</a></h3>
+    <p>Daily sea surface temperature and salinity maps against AVHRR and CMEMS satellite products &mdash; pick any date to compare.</p>
+    <p class="src">Data source: <a href="https://data.marine.copernicus.eu" target="_blank" rel="noopener">NOAA AVHRR OISST &amp; Copernicus Marine &#8599;</a></p>
+  </div>
 </div>
 
 <h2>Model Domain in 3D</h2>
