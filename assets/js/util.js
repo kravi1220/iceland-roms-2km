@@ -16,7 +16,9 @@ function renderLegend(bathyMeta, containerId) {
 function addBathyLayer(map, bathyMeta, imageUrl) {
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 10,
+    maxZoom: 16,
+    maxNativeZoom: 19,
+    detectRetina: true,
   }).addTo(map);
   L.imageOverlay(imageUrl, bathyMeta.bounds, { opacity: 0.82 }).addTo(map);
   map.fitBounds(bathyMeta.bounds);

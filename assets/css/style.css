@@ -446,3 +446,5 @@ input[type="range"] { accent-color: var(--accent); }
 .section-card .src { margin:auto 0 0; font-size:0.82rem; color:var(--muted); position:relative; z-index:2; }
 .section-card .src a { color: var(--accent-dark); }
 .sources li { margin-bottom:0.5rem; }
+.section-card .card-art.photo { background:#fff; border:1px solid var(--border); }
+.section-card .card-art.photo img { width:100%; height:260px; object-fit:contain; border:0; border-radius:0; margin:0; max-height:none; display:block; }
