@@ -38,25 +38,72 @@ model, adding a dynamic&ndash;thermodynamic sea-ice component to ROMS for the
 northern part of the domain.</p>
 
 <div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); line-height:0; max-width:900px;">
-<svg viewBox="0 0 640 300" role="img" aria-label="Schematic of sea ice floes around Iceland" style="width:100%; height:auto; display:block;"><defs>
-<linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f5f94"/><stop offset="1" stop-color="#062a47"/></linearGradient>
-<linearGradient id="ci" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe6f3"/></linearGradient>
-</defs>
-<rect width="640" height="300" fill="url(#cs)"/>
-<g fill="#ffffff" fill-opacity=".07"><path d="M0 60q80-24 160 0t160 0 160 0 160 0v14H0z"/><path d="M0 130q80-24 160 0t160 0 160 0 160 0v12H0z"/></g>
-<g fill="url(#ci)" stroke="#a9cde3" stroke-width="1.5">
-<path d="M20 40l60-14 70 10 36 26-34 26-72 8-48-20z"/>
-<path d="M470 22l80-10 70 18 10 30-46 18-84-6-30-30z"/>
-<path d="M40 210l70-12 50 22-18 28-84 6-30-24z"/>
-<path d="M500 220l60-14 70 16-8 34-72 10-46-24z"/>
-<path d="M300 250l46-8 40 12-16 20-56 4z"/>
-<path d="M395 96l30-6 26 12-14 16-36 2z"/>
-<path d="M175 262l30-4 20 10-22 12-30-2z"/></g>
-<path d="M175 165l25-33 42-13 46 5 40-17 48 8 40 20 22 30-18 26-58 20-56-4-52 13-52-12-34-22z" fill="#7d9a6a" stroke="#4d6640" stroke-width="2"/>
-<path d="M255 158l38-12 40 4 30-8 32 12-12 18-52 8-46-6z" fill="#f3f7fa" fill-opacity=".9"/>
-<g stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" opacity=".85">
-<path d="M130 160c30-14 20-40 50-54"/><path d="M104 190c40-4 60 20 96 6"/><path d="M420 200c30 12 60 4 84-12"/></g>
-<text x="20" y="288" font-family="Inter,Arial,sans-serif" font-size="13" fill="#fff" fill-opacity=".8">Schematic &#8212; not to scale</text></svg>
+<svg viewBox="0 0 640 300" role="img" aria-label="Schematic of the East Greenland Current carrying sea ice toward Iceland through the Denmark Strait" style="width:100%; height:auto; display:block;"><defs>
+<linearGradient id="cs" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1c5c82"/><stop offset="0.45" stop-color="#0e3f61"/><stop offset="1" stop-color="#051b2e"/>
+</linearGradient>
+<radialGradient id="floeFill" cx="35%" cy="30%" r="75%">
+  <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#e7f1f6"/><stop offset="1" stop-color="#bcd6e3"/>
+</radialGradient>
+<linearGradient id="land" x1="0" y1="0" x2="0.3" y2="1">
+  <stop offset="0" stop-color="#8a9c72"/><stop offset="0.6" stop-color="#6d8058"/><stop offset="1" stop-color="#57683f"/>
+</linearGradient>
+<filter id="iceShadow" x="-40%" y="-40%" width="180%" height="180%">
+  <feDropShadow dx="0" dy="3" stdDeviation="2.6" flood-color="#02101d" flood-opacity="0.4"/>
+</filter>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+  <path d="M0 0L10 5L0 10z" fill="#dff1fa"/>
+</marker>
+</defs><rect width="640" height="300" fill="url(#cs)"/><g stroke="#ffffff" stroke-opacity="0.06" fill="none"><path d="M0 20q80-16 160 0t160 0 160 0 160 0"/><path d="M0 200q80-14 160 0t160 0 160 0 160 0"/><path d="M0 245q80-12 160 0t160 0 160 0 160 0"/></g><path d="M-10 26C90 40 150 70 210 95S330 150 385 158" fill="none" stroke="#dff1fa" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round" opacity="0.8" marker-end="url(#arrow)"/><g filter="url(#iceShadow)">
+<path d="M71.8 77.1L60.7 101.7L11.3 102.9L-12.0 82.1L-22.4 61.2L5.1 44.2L47.6 38.9L86.5 53.7Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M71.8 77.1Q25.349217060036516 66.7080359642731 -22.4 61.2" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M119.3 74.5L72.9 75.0L65.1 49.7L69.9 33.2L93.9 13.8L131.8 26.0L140.3 50.8Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M119.3 74.5Q91.78536965109666 54.77772229660979 69.9 33.2" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+<ellipse cx="98.3" cy="46.1" rx="13.4" ry="7.3" fill="#3fb8c9" opacity="0.75"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M193.0 106.7L166.5 123.5L126.8 119.0L93.1 105.5L88.2 81.0L122.6 68.4L153.5 64.4L199.0 61.6L202.5 87.1Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M193.0 106.7Q144.43240096058219 93.50038621033478 88.2 81.0" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M43.9 141.4L26.0 125.2L25.8 104.0L59.3 97.8L86.2 106.8L102.4 125.4L86.0 151.2Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M43.9 141.4Q55.27968744155964 122.57490949618058 59.3 97.8" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M254.8 60.1L234.7 79.3L196.8 80.5L169.0 62.4L180.7 38.6L213.9 25.3L236.4 43.6Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M254.8 60.1Q214.92479479261195 60.04294917468563 169.0 62.4" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+<ellipse cx="214.3" cy="56.6" rx="12.2" ry="6.7" fill="#3fb8c9" opacity="0.75"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M196.8 140.5L163.0 134.6L156.4 113.8L173.1 99.7L196.5 100.2L224.4 105.7L219.3 125.4Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M196.8 140.5Q186.63546986449992 123.30886048550825 173.1 99.7" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M290.5 90.9L265.8 94.8L239.2 87.1L252.9 70.9L275.4 60.9L295.9 74.1Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M290.5 90.9Q269.67185567735487 81.55031944312624 252.9 70.9" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M240.2 138.5L225.8 124.2L251.0 118.6L274.9 118.6L272.2 133.4L259.4 142.4Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M240.2 138.5Q254.59416183920533 131.07507490426013 274.9 118.6" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M331.6 111.5L310.7 111.4L303.1 100.5L305.3 85.5L326.9 91.5L342.0 99.3Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M331.6 111.5Q316.686664308847 98.17423179447911 305.3 85.5" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M315.4 149.1L301.9 154.5L286.6 151.3L287.9 141.8L297.7 133.2L315.2 137.8Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M315.4 149.1Q305.12409570163175 144.55427783695748 287.9 141.8" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M346.9 136.5L335.6 128.8L343.2 117.6L360.4 122.2L362.0 132.7Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M346.9 136.5Q347.66736452273847 124.75210492140938 343.2 117.6" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g>
+<g filter="url(#iceShadow)">
+<path d="M122.2 160.0L102.0 163.2L88.2 152.1L100.2 142.0L115.2 141.5L128.3 148.2Z" fill="url(#floeFill)" stroke="#7fa3b8" stroke-width="1.4" stroke-linejoin="round"/>
+<path d="M122.2 160.0Q111.04997307258647 152.3287004577995 100.2 142.0" fill="none" stroke="#9cc0d4" stroke-width="1" opacity="0.85"/>
+</g><path d="M432 178L444 158L452 172L462 150L470 168L486 158L505 168L520 153L540 163L560 150L585 158L605 150L628 158L648 172L652 220L636 255L600 278L560 292L520 296L480 286L452 262L436 232L428 200Z" fill="url(#land)" stroke="#3f4f36" stroke-width="1.6" stroke-linejoin="round"/><ellipse cx="588" cy="215" rx="26" ry="17" fill="#eef6fa" opacity="0.85"/><ellipse cx="500" cy="185" rx="12" ry="8" fill="#eef6fa" opacity="0.75"/><text x="70" y="18" font-family="Inter,Arial,sans-serif" font-size="12" font-style="italic" fill="#dff1fa" fill-opacity="0.9">East Greenland Current</text><text x="392" y="148" font-family="Inter,Arial,sans-serif" font-size="12" fill="#eaf5fb" fill-opacity="0.9">Denmark Strait</text><text x="560" y="270" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#233421" fill-opacity="0.85">Iceland</text><text x="16" y="288" font-family="Inter,Arial,sans-serif" font-size="12" fill="#fff" fill-opacity="0.75">Schematic — not to scale</text></svg>
 </div>
 <p class="meta" style="font-size:0.85rem; margin-top:0.5rem;">Cartoon illustration of sea-ice floes around Iceland; not model output.</p>
 
