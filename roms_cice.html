@@ -6,7 +6,8 @@
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROMS-CICE · Iceland ROMS 2km</title>
-<link rel="stylesheet" href="assets/css/style.css?v=8">
+<link rel="stylesheet" href="assets/css/style.css?v=9">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 </head>
 <body>
 <header class="site-header">
@@ -59,6 +60,28 @@ northern part of the domain.</p>
 <text x="20" y="288" font-family="Inter,Arial,sans-serif" font-size="13" fill="#fff" fill-opacity=".8">Schematic &#8212; not to scale</text></svg>
 </div>
 <p class="meta" style="font-size:0.85rem; margin-top:0.5rem;">Cartoon illustration of sea-ice floes around Iceland; not model output.</p>
+
+<h2>Model domain</h2>
+<p>The same 2&nbsp;km Iceland grid and bathymetry used by the ocean-only ROMS
+model &mdash; CICE will run coupled on this domain. Pan and zoom to explore it;
+the northern shelf and Denmark Strait, where sea ice is most relevant, are
+in the upper part of the map.</p>
+<div id="map" style="height:480px; border-radius:10px; border:1px solid var(--border);"></div>
+<div id="legend"></div>
+<p class="meta" style="font-size:0.85rem;">Rendered directly from the model grid
+(<code>iceland2km_grid.nc</code>), the same bathymetry as
+<a href="about.html">About the Model</a>.</p>
+
+<h2>Satellite sea-ice concentration (annual maximum)</h2>
+<p>For scale, this is Arctic-wide sea-ice concentration on 14&nbsp;March 2024,
+the date of that year&rsquo;s yearly-maximum extent &mdash; the East
+Greenland/Denmark Strait tongue reaching toward Iceland is visible at the
+lower right of the ice pack. This is Arctic-wide satellite context, not a
+model output or a zoom on the Iceland domain.</p>
+<div style="border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow); max-width:520px;">
+<img src="assets/img/brand/arctic_ice_concentration_max.jpg" alt="Satellite map of Arctic sea-ice concentration on 14 March 2024, the yearly maximum extent" style="display:block; width:100%; height:auto;">
+</div>
+<p class="src" style="font-size:0.82rem; color:var(--muted); margin-top:0.4rem;">Source: NASA Earth Observatory (Lauren Dauphin), using data from the <a href="https://nsidc.org" target="_blank" rel="noopener">National Snow and Ice Data Center (NSIDC)</a> &mdash; <a href="https://earthobservatory.nasa.gov/images/152596/arctic-sea-ice-continues-to-decline" target="_blank" rel="noopener">public domain</a>.</p>
 
 <h2>Why sea ice matters around Iceland</h2>
 <p>Iceland sits at the boundary between warm Atlantic water and cold, fresh
@@ -136,6 +159,8 @@ they become available. For questions or collaboration, contact
   Source code and figures: <a href="https://github.com/kravi1220/iceland-roms-2km">github.com/kravi1220/iceland-roms-2km</a></p>
 </footer>
 <script src="assets/js/site.js"></script>
+<script src="vendor/leaflet/leaflet.js"></script>
 <script src="assets/js/util.js?v=2"></script>
+<script src="assets/js/about-map.js"></script>
 </body>
 </html>
