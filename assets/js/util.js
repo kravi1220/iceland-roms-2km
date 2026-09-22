@@ -7,8 +7,11 @@ async function loadJSON(url) {
 function renderLegend(bathyMeta, containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
+  // The overlay is rendered with a reversed-viridis colormap (viridis_r):
+  // shallow water (0 m) is yellow and the deepest water is dark purple. The
+  // gradient stops below must run in that same direction to match the image.
   el.innerHTML = `
-    <div class="legend-bar" style="background:linear-gradient(to right, #440154, #3b528b, #21918c, #5ec962, #fde725)"></div>
+    <div class="legend-bar" style="background:linear-gradient(to right, #fde725, #5ec962, #21918c, #3b528b, #440154)"></div>
     <div class="legend-labels"><span>0 m</span><span>${bathyMeta.depth_label}</span><span>${Math.round(bathyMeta.vmax)} m</span></div>
   `;
 }
