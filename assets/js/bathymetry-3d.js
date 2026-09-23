@@ -1,13 +1,13 @@
 (function () {
   const LAND_COLOR = "#a89f78";
   const WALL_COLOR = "#9aa1a8";
-  const BOTTOM_COLOR_SCALE = [[0, "#eef0f1"], [1, "#7d8288"]];
-  // Plotly's built-in "Turbo" colorscale name doesn't render correctly for
-  // surface traces in this Plotly.js version (renders as near-uniform), so
-  // spell it out explicitly.
-  const TURBO_SCALE = [
-    [0.0, "#30123b"], [0.17, "#4145ab"], [0.33, "#26bce1"],
-    [0.5, "#3fef8d"], [0.67, "#e1dd37"], [0.83, "#fb7e21"], [1.0, "#7a0403"],
+  // Same reversed-viridis scale as the 2-D bathymetry map on About the Model
+  // (util.js renderLegend): shallow (0 m) is yellow, the deepest water is
+  // dark purple. Plotly's built-in colorscale names don't render correctly
+  // for surface traces in this Plotly.js version, so spell it out explicitly.
+  const DEPTH_SCALE = [
+    [0.0, "#fde725"], [0.25, "#5ec962"], [0.5, "#21918c"],
+    [0.75, "#3b528b"], [1.0, "#440154"],
   ];
 
   async function main() {
@@ -22,12 +22,12 @@
       type: "surface",
       x: d.lon, y: d.lat, z: d.ocean_z,
       surfacecolor: d.ocean_color,
-      cmin: d.sst_range[0], cmax: d.sst_range[1],
-      colorscale: TURBO_SCALE,
+      cmin: d.depth_range[0], cmax: d.depth_range[1],
+      colorscale: DEPTH_SCALE,
       showscale: false,
       lighting: { ambient: 0.75, diffuse: 0.5, specular: 0.1 },
-      hovertemplate: "SST %{surfacecolor:.1f}°C<extra></extra>",
-      name: "Sea surface temperature",
+      hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
+      name: "Bathymetry",
     };
 
     const landTop = {
@@ -45,10 +45,12 @@
     const seafloor = {
       type: "surface",
       x: d.lon, y: d.lat, z: d.bottom_z,
-      colorscale: BOTTOM_COLOR_SCALE,
+      surfacecolor: d.bottom_color,
+      cmin: d.depth_range[0], cmax: d.depth_range[1],
+      colorscale: DEPTH_SCALE,
       showscale: false,
       lighting: { ambient: 0.7, diffuse: 0.6, specular: 0.05 },
-      hovertemplate: "Depth-side relief<extra></extra>",
+      hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
       name: "Seafloor relief",
     };
 
