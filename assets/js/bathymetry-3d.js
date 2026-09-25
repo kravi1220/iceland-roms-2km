@@ -4,7 +4,7 @@
   // Same reversed-viridis scale as the 2-D bathymetry map on About the Model
   // (util.js renderLegend): shallow (0 m) is yellow, the deepest water is
   // dark purple. Plotly's built-in colorscale names don't render correctly
-  // for surface traces in this Plotly.js version, so spell it out explicitly.
+  // in this Plotly.js version, so spell it out explicitly.
   const DEPTH_SCALE = [
     [0.0, "#fde725"], [0.1, "#bddf26"], [0.2, "#7ad151"], [0.3, "#44bf70"],
     [0.4, "#22a884"], [0.5, "#21908d"], [0.6, "#2a788e"], [0.7, "#355f8d"],
@@ -15,47 +15,44 @@
   const FLAT_LIGHT = { ambient: 1, diffuse: 0, specular: 0, fresnel: 0, roughness: 1 };
 
   async function main() {
-    const d = await loadJSON("data/bathymetry_3d.json?v=2");
+    const d = await loadJSON("data/bathymetry_3d.json?v=3");
 
     const lonSpan = d.bounds.lon_max - d.bounds.lon_min;
     const latSpan = d.bounds.lat_max - d.bounds.lat_min;
     const padLon = lonSpan * 0.08;
     const padLat = latSpan * 0.08;
 
-    const oceanTop = {
-      type: "surface",
-      x: d.lon, y: d.lat, z: d.ocean_z,
-      surfacecolor: d.ocean_color,
+    // Explicit triangle meshes (mesh3d): every vertex carries its own lon,
+    // lat, z and depth, so colour, position and tooltip always agree.
+    // (Plotly's 2-D-array "surface" trace mixed up the indices of a
+    // curvilinear grid and showed the wrong depth at a location.)
+    const depthMesh = (m, name) => ({
+      type: "mesh3d",
+      x: m.x, y: m.y, z: m.z,
+      i: m.i, j: m.j, k: m.k,
+      intensity: m.c,
+      intensitymode: "vertex",
       cmin: d.depth_range[0], cmax: d.depth_range[1],
       colorscale: DEPTH_SCALE,
       showscale: false,
+      flatshading: false,
       lighting: FLAT_LIGHT,
-      hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
-      name: "Bathymetry",
-    };
+      hovertemplate: "Depth %{intensity:.0f} m<extra></extra>",
+      name,
+    });
+
+    const oceanTop = depthMesh(d.ocean, "Bathymetry");
+    const seafloor = depthMesh(d.seafloor, "Seafloor relief");
 
     const landTop = {
-      type: "surface",
-      x: d.lon, y: d.lat, z: d.land_z,
-      surfacecolor: d.land_z.map((row) => row.map((v) => (v === null ? null : 1))),
-      cmin: 0, cmax: 1,
-      colorscale: [[0, LAND_COLOR], [1, LAND_COLOR]],
-      showscale: false,
+      type: "mesh3d",
+      x: d.land.x, y: d.land.y, z: d.land.z,
+      i: d.land.i, j: d.land.j, k: d.land.k,
+      color: LAND_COLOR,
+      flatshading: true,
       lighting: { ambient: 0.9, diffuse: 0.3 },
       hoverinfo: "skip",
       name: "Land",
-    };
-
-    const seafloor = {
-      type: "surface",
-      x: d.lon, y: d.lat, z: d.bottom_z,
-      surfacecolor: d.bottom_color,
-      cmin: d.depth_range[0], cmax: d.depth_range[1],
-      colorscale: DEPTH_SCALE,
-      showscale: false,
-      lighting: FLAT_LIGHT,
-      hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
-      name: "Seafloor relief",
     };
 
     const wall = {

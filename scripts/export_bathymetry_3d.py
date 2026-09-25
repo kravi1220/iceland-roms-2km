@@ -5,8 +5,14 @@ interactive Plotly (WebGL) scene instead of a static image: a flat ocean
 top face coloured by real bathymetric depth (same yellow-to-purple scale as
 the 2-D bathymetry map on About the Model), a flat land top face, the real
 bathymetric relief on the bottom face (coloured the same way), and wall
-geometry (triangulated for Plotly's mesh3d) closing the volume along the
-domain perimeter.
+geometry closing the volume along the domain perimeter.
+
+Everything is exported as explicit triangle meshes (Plotly mesh3d): one list
+of vertices, each with its own lon, lat, z and depth, plus triangle indices.
+Plotly's 2-D-array "surface" trace was NOT used: with a curvilinear grid it
+paired depth values with the wrong lon/lat (transposed indices) in tooltips,
+so the depth shown did not match the position. With meshes every vertex
+carries its own depth, so colour, position and tooltip always agree.
 """
 import json
 
@@ -38,6 +44,34 @@ def rnd(arr, nd=3):
     a = np.asarray(arr, dtype=float)
     a = np.round(a, nd)
     return [[None if np.isnan(v) else v for v in row] for row in a]
+
+
+def grid_mesh(quad_ok, lon_d, lat_d, z, depth, nd_xy=4, nd_z=3):
+    """Triangulate the grid quads flagged in quad_ok ((ny-1, nx-1) bool).
+
+    Returns a dict of compact vertex arrays (only vertices that are used) and
+    triangle index arrays, ready for Plotly mesh3d.
+    """
+    ny, nx = lon_d.shape
+    idx = np.arange(ny * nx).reshape(ny, nx)
+    qi, qj = np.nonzero(quad_ok)
+    a = idx[qi, qj]
+    b = idx[qi, qj + 1]
+    c = idx[qi + 1, qj + 1]
+    d = idx[qi + 1, qj]
+    tris = np.concatenate([np.stack([a, b, c], axis=1), np.stack([a, c, d], axis=1)])
+    used = np.unique(tris)
+    remap = -np.ones(ny * nx, dtype=np.int64)
+    remap[used] = np.arange(len(used))
+    tris = remap[tris]
+    flat = lambda arr: np.asarray(arr, dtype=float).ravel()[used]
+    return dict(
+        x=[round(float(v), nd_xy) for v in flat(lon_d)],
+        y=[round(float(v), nd_xy) for v in flat(lat_d)],
+        z=[round(float(v), nd_z) for v in flat(z)],
+        c=[round(float(v), 1) for v in flat(depth)],
+        i=tris[:, 0].tolist(), j=tris[:, 1].tolist(), k=tris[:, 2].tolist(),
+    )
 
 
 def wall_mesh(lon_e, lat_e, z_top_e, z_bot_e, x_all, y_all, z_all):
@@ -88,10 +122,13 @@ def main():
     # Both the flat top face and the real-relief bottom face are coloured by
     # the same underlying depth field, so the whole slab reads as one
     # consistent bathymetry map -- just like About the Model's 2-D overlay.
-    ocean_color = np.where(mask_d, h_d, np.nan)
-    ocean_z = np.where(mask_d, 0.0, np.nan)
-    land_z = np.where(~mask_d, 0.0, np.nan)
-    bottom_color = h_filled
+    m = mask_d
+    all_ocean = m[:-1, :-1] & m[:-1, 1:] & m[1:, 1:] & m[1:, :-1]
+    any_land = ~all_ocean
+    ocean_mesh = grid_mesh(all_ocean, lon_d, lat_d, top_z, h_d)
+    # land: any quad touching a land cell, so there is no gap along the coast
+    land_mesh = grid_mesh(any_land, lon_d, lat_d, top_z, np.zeros_like(top_z))
+    seafloor_mesh = grid_mesh(np.ones_like(all_ocean), lon_d, lat_d, bottom_z, h_filled)
 
     # Perimeter walls (triangulated for mesh3d)
     x_all, y_all, z_all, faces = [], [], [], []
@@ -119,14 +156,11 @@ def main():
                                      lat=[round(float(v), 4) for v in ys]))
 
     payload = dict(
-        lon=rnd(lon_d, 4),
-        lat=rnd(lat_d, 4),
-        ocean_z=rnd(ocean_z),
-        ocean_color=rnd(ocean_color, 1),
-        land_z=rnd(land_z),
-        bottom_z=rnd(bottom_z),
-        bottom_color=rnd(bottom_color, 1),
-        depth_range=[depth_vmin, round(depth_vmax, 1)],
+        ocean=ocean_mesh,
+        land=dict(x=land_mesh["x"], y=land_mesh["y"], z=land_mesh["z"],
+                  i=land_mesh["i"], j=land_mesh["j"], k=land_mesh["k"]),
+        seafloor=seafloor_mesh,
+        depth_range=[depth_vmin, depth_vmax],
         wall=dict(x=x_all, y=y_all, z=z_all,
                   i=[f[0] for f in faces], j=[f[1] for f in faces], k=[f[2] for f in faces]),
         coastlines=coast_lines,
