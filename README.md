@@ -51,6 +51,12 @@ client-side.
   bounds JSON directly from `iceland2km_grid.nc`, pre-warped to Web Mercator
   so it lines up with the Leaflet basemap at every latitude (a plain
   lon/lat-gridded image drifts noticeably north-south otherwise).
+  It also writes `assets/img/overview/bathymetry_depth.png`, a raster where
+  each ocean pixel stores the model depth in metres (R*256+G) on the same
+  layout; the maps read it to show the true model depth under the cursor. The
+  colour scale is fixed at 0-4000 m and the overlay is drawn fully opaque, so a
+  given depth always shows the same colour as the legend (a translucent overlay
+  blends with the basemap and misreads deep water by several hundred metres).
 - `../roms_mooring_validation.py` (in the parent working directory, not part
   of this repo) — the ROMS-vs-mooring colocation pipeline; regenerates
   `mooring_plots/*.png` and this repo's `data/moorings*.json`.

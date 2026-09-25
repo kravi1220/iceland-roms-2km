@@ -5,7 +5,7 @@
 
   async function main() {
     const [bathy, index] = await Promise.all([
-      loadJSON("data/bathymetry_overlay.json"),
+      loadJSON("data/bathymetry_overlay.json?v=2"),
       loadJSON("data/moorings.json"),
     ]);
 

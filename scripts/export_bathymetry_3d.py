@@ -81,8 +81,9 @@ def main():
     bottom_z = -h_filled / 1000.0 * VERT_EXAGGERATION
     top_z = np.zeros_like(bottom_z)
 
-    depth_vmin = 0.0
-    depth_vmax = float(np.percentile(h_d[mask_d], 99))
+    # Same fixed scale as the 2-D map (scripts/generate_bathymetry_overlay.py),
+    # deeper than the deepest model cell so nothing is clipped.
+    depth_vmin, depth_vmax = 0.0, 4000.0
 
     # Both the flat top face and the real-relief bottom face are coloured by
     # the same underlying depth field, so the whole slab reads as one

@@ -6,12 +6,16 @@
   // dark purple. Plotly's built-in colorscale names don't render correctly
   // for surface traces in this Plotly.js version, so spell it out explicitly.
   const DEPTH_SCALE = [
-    [0.0, "#fde725"], [0.25, "#5ec962"], [0.5, "#21918c"],
-    [0.75, "#3b528b"], [1.0, "#440154"],
+    [0.0, "#fde725"], [0.1, "#bddf26"], [0.2, "#7ad151"], [0.3, "#44bf70"],
+    [0.4, "#22a884"], [0.5, "#21908d"], [0.6, "#2a788e"], [0.7, "#355f8d"],
+    [0.8, "#414487"], [0.9, "#482475"], [1.0, "#440154"],
   ];
+  // Flat, unshaded lighting: shading would darken/brighten the depth colours
+  // so they no longer match the legend.
+  const FLAT_LIGHT = { ambient: 1, diffuse: 0, specular: 0, fresnel: 0, roughness: 1 };
 
   async function main() {
-    const d = await loadJSON("data/bathymetry_3d.json");
+    const d = await loadJSON("data/bathymetry_3d.json?v=2");
 
     const lonSpan = d.bounds.lon_max - d.bounds.lon_min;
     const latSpan = d.bounds.lat_max - d.bounds.lat_min;
@@ -25,7 +29,7 @@
       cmin: d.depth_range[0], cmax: d.depth_range[1],
       colorscale: DEPTH_SCALE,
       showscale: false,
-      lighting: { ambient: 0.75, diffuse: 0.5, specular: 0.1 },
+      lighting: FLAT_LIGHT,
       hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
       name: "Bathymetry",
     };
@@ -49,7 +53,7 @@
       cmin: d.depth_range[0], cmax: d.depth_range[1],
       colorscale: DEPTH_SCALE,
       showscale: false,
-      lighting: { ambient: 0.7, diffuse: 0.6, specular: 0.05 },
+      lighting: FLAT_LIGHT,
       hovertemplate: "Depth %{surfacecolor:.0f} m<extra></extra>",
       name: "Seafloor relief",
     };

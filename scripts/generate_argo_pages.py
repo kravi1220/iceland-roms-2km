@@ -87,7 +87,7 @@ def float_page(fid: str, lon: str, lat: str, n_days: str, have: dict) -> str:
 
     body = HEAD.format(
         title=f"Argo float {fid}",
-        css="../assets/css/style.css?v=8",
+        css="../assets/css/style.css?v=9",
         home="../index.html",
         about="../about.html",
         argo_index="index.html",

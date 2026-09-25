@@ -10,8 +10,9 @@
     ]
   ],
   "vmin": 0.0,
-  "vmax": 3647.668934478178,
+  "vmax": 4000.0,
   "cmap": "viridis_r",
   "depth_label": "Depth (m)",
+  "depth_png": "bathymetry_depth.png",
   "source": "iceland2km_grid.nc (HAFRO ROMS Iceland 2km grid): variables h, mask_rho, lon_rho, lat_rho"
 }

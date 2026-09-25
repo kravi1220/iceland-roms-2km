@@ -500,3 +500,23 @@ img { max-width: 100%; }
   html { scroll-behavior: auto; }
   * { transition: none !important; }
 }
+
+/* bathymetry legend ticks + hover depth readout */
+.legend-ticks {
+  position: relative;
+  height: 1.1rem;
+  margin-top: 0.25rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.legend-ticks span { position: absolute; top: 0; white-space: nowrap; }
+.legend-title { text-align: center; font-size: 0.78rem; color: var(--muted); }
+.depth-readout {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
